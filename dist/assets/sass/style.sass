@@ -3,25 +3,25 @@
 	box-sizing: border-box
 	margin: 0
 	padding: 0
-	font-family: 'Mark';
+	font-family: 'Mark'
 	outline: none
 body
-    overflow: hidden
-a	
+	overflow: hidden
+a
 	color: inherit
 	text-decoration: none
 	&:visited
 		text-decoration: none
 		color: inherit
-	
+
 	&:hover
 		text-decoration: none
 		color: inherit
-	
+
 	&:focus
 		text-decoration: none
 		color: inherit
-	
+
 	&:active
 		text-decoration: none
 		color: inherit
@@ -78,69 +78,69 @@ a
 	visibility: hidden
 
 .menu
-    position: absolute
-    top: 0
-    width: 100%
-    height: 100px
-    background: transparent
-    display: flex
-    align-items: center
-    justify-content: space-between
-    padding-right: 40px
-    padding-left: 150px
-    &__block
-        min-width: 157px
-        display: flex
-        justify-content: space-between
-        align-items: center
-        &-schedule
-            font-size: 11px
-            font-weight: 700
-            margin-right: 40px
-            letter-spacing: 1.78px
-        svg
-            width: 22px
-            height: 22px
+	position: absolute
+	top: 0
+	width: 100%
+	height: 100px
+	background: transparent
+	display: flex
+	align-items: center
+	justify-content: space-between
+	padding-right: 40px
+	padding-left: 150px
+	&__block
+		min-width: 157px
+		display: flex
+		justify-content: space-between
+		align-items: center
+		&-schedule
+			font-size: 11px
+			font-weight: 700
+			margin-right: 40px
+			letter-spacing: 1.78px
+			svg
+				width: 22px
+				height: 22px
 .menu__block-schedule
 	color: #fff
 	background-color: #9EC73D
 
 .sidecontrol
-    position: absolute
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    align-items: center
-    padding: 40px 0
-    top: 0
-    width: 84px
-    height: 100vh
-    border-right: 1px solid rgba(0,0,0,.1)
-    &__controls
-        display: flex
-        justify-content: space-between
-        align-items: center
-        transform: rotate(-90deg) translateX(90px)
-        min-width: 200px
-        span, svg
-            display: block
-        a
-            display: block
-        a svg
-            display: block
-            width: 20px
-            height: 24px
-            transform: rotate(90deg)
-        &-count 
-            font-size: 13px
-            letter-spacing: -0.26px
-            opacity: .4
-            font-weight: 900
-        &-show 
-            color: $main-color
-            font-size: 13px;
-            letter-spacing: -0.26px
-            font-weight: 900
+	position: absolute
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	align-items: center
+	padding: 40px 0
+	top: 0
+	width: 84px
+	height: 100vh
+	border-right: 1px solid rgba(0,0,0,.1)
+	&__controls
+		display: flex
+		justify-content: space-between
+		align-items: center
+		transform: rotate(-90deg) translateX(90px)
+		min-width: 200px
+		span, svg
+			display: block
+			a
+				display: block
+				a svg
+					display: block
+					width: 20px
+					height: 24px
+					transform: rotate(90deg)
+				&-count
+					font-size: 13px
+					letter-spacing: -0.26px
+					opacity: .4
+					font-weight: 900
+				&-show
+					color: $main-color
+					font-size: 13px
+					letter-spacing: -0.26px
+					font-weight: 900
 .sidecontrol a
 	z-index: 30
 .plus
@@ -173,16 +173,16 @@ a
 	background-color: $main-color
 
 .evolve
-    font-weight: 900
-    font-size: 20px
-    letter-spacing: -0.4px
-    color: #000000
-    span
-        color: $main-color
+	font-weight: 900
+	font-size: 20px
+	letter-spacing: -0.4px
+	color: #000000
+	span
+		color: $main-color
 .opaci
 	color: #000
 	opacity: .4
-	span 
+	span
 		color: #000
 		opacity: .5
 .overlay
@@ -207,7 +207,7 @@ a
 		cursor: pointer
 .msg
 	display: none
-    margin-top: 20px
+	margin-top: 20px
 @import 'showup'
 @import 'difference'
 @import 'modules'
