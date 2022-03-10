@@ -3095,20 +3095,24 @@ function (_Slider) {
   _inherits(MiniSlider, _Slider);
 
   function MiniSlider(container, next, prev, activeClass, animate, autoplay) {
+    var _this;
+
     _classCallCheck(this, MiniSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, next, prev, activeClass, animate, autoplay));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MiniSlider).call(this, container, next, prev, activeClass, animate, autoplay));
+    _this.paused = false;
+    return _this;
   }
 
   _createClass(MiniSlider, [{
     key: "decorizeSlides",
     value: function decorizeSlides() {
-      var _this = this;
+      var _this2 = this;
 
       this.slides.forEach(function (slide) {
-        slide.classList.remove(_this.activeClass);
+        slide.classList.remove(_this2.activeClass);
 
-        if (_this.animate) {
+        if (_this2.animate) {
           slide.querySelector('.card__title').style.opacity = '0.4';
           slide.querySelector('.card__controls-arrow').style.opacity = '0';
         }
@@ -3126,41 +3130,43 @@ function (_Slider) {
   }, {
     key: "nextSlide",
     value: function nextSlide() {
-      if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
-        this.container.appendChild(this.slides[0]); // Slide
-
-        this.container.appendChild(this.slides[0]); // Btn
-
-        this.container.appendChild(this.slides[0]); // Btn
-
-        this.decorizeSlides();
-      } else if (this.slides[1].tagName == "BUTTON") {
-        this.container.appendChild(this.slides[0]); // Slide
-
-        this.container.appendChild(this.slides[0]); // Btn
-
-        this.decorizeSlides();
+      // if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
+      //     this.container.appendChild(this.slides[0]); // Slide
+      //     this.container.appendChild(this.slides[0]); // Btn
+      //     this.container.appendChild(this.slides[0]); // Btn
+      //     this.decorizeSlides();
+      // } else if (this.slides[1].tagName == "BUTTON"){
+      //     this.container.appendChild(this.slides[0]); // Slide
+      //     this.container.appendChild(this.slides[0]); // Btn
+      //     this.decorizeSlides();
+      // } else {
+      //     this.container.appendChild(this.slides[0]);
+      //     this.decorizeSlides();
+      // }
+      if (this.prev.parentNode === this.container) {
+        this.container.insertBefore(this.slides[0], this.prev);
       } else {
         this.container.appendChild(this.slides[0]);
-        this.decorizeSlides();
       }
+
+      this.decorizeSlides();
     }
   }, {
     key: "bindTriggers",
     value: function bindTriggers() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.next.addEventListener('click', function () {
-        return _this2.nextSlide();
+        return _this3.nextSlide();
       });
       this.prev.addEventListener('click', function () {
-        for (var i = _this2.slides.length - 1; i > 0; i--) {
-          if (_this2.slides[i].tagName !== "BUTTON") {
-            var active = _this2.slides[i];
+        for (var i = _this3.slides.length - 1; i > 0; i--) {
+          if (_this3.slides[i].tagName !== "BUTTON") {
+            var active = _this3.slides[i];
 
-            _this2.container.insertBefore(active, _this2.slides[0]);
+            _this3.container.insertBefore(active, _this3.slides[0]);
 
-            _this2.decorizeSlides();
+            _this3.decorizeSlides();
 
             break;
           }
@@ -3168,18 +3174,43 @@ function (_Slider) {
       });
     }
   }, {
+    key: "activateAnimation",
+    value: function activateAnimation() {
+      var _this4 = this;
+
+      this.paused = setInterval(function () {
+        return _this4.nextSlide();
+      }, 5000);
+    }
+  }, {
     key: "init",
     value: function init() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.container.style.cssText = "\n            display: flex;\n            flex-wrap: wrap;\n            overflow: hidden;\n            align-items: flex-start;\n        ";
       this.bindTriggers();
       this.decorizeSlides();
 
       if (this.autoplay) {
-        setInterval(function () {
-          return _this3.nextSlide();
-        }, 5000);
+        this.container.addEventListener('mouseenter', function () {
+          return clearInterval(_this5.paused);
+        });
+        this.next.addEventListener('mouseenter', function () {
+          return clearInterval(_this5.paused);
+        });
+        this.prev.addEventListener('mouseenter', function () {
+          return clearInterval(_this5.paused);
+        });
+        this.container.addEventListener('mouseleave', function () {
+          return _this5.activateAnimation();
+        });
+        this.next.addEventListener('mouseleave', function () {
+          return _this5.activateAnimation();
+        });
+        this.prev.addEventListener('mouseleave', function () {
+          return _this5.activateAnimation();
+        });
+        this.activateAnimation();
       }
     }
   }]);
