@@ -3129,15 +3129,15 @@ function (_Slider) {
       if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
         this.container.appendChild(this.slides[0]); // Slide
 
-        this.container.appendChild(this.slides[1]); // Btn
+        this.container.appendChild(this.slides[0]); // Btn
 
-        this.container.appendChild(this.slides[2]); // Btn
+        this.container.appendChild(this.slides[0]); // Btn
 
         this.decorizeSlides();
       } else if (this.slides[1].tagName == "BUTTON") {
         this.container.appendChild(this.slides[0]); // Slide
 
-        this.container.appendChild(this.slides[1]); // Btn
+        this.container.appendChild(this.slides[0]); // Btn
 
         this.decorizeSlides();
       } else {
