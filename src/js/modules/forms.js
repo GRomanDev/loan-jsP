@@ -122,9 +122,9 @@ export default class Form {
                 statusMessage.classList.add('animated');
                 statusMessage.classList.add('tada');
                 statusMessage.style.cssText = `
-                    margin-top: 15px;
-                    font-size: 18px;
-                    color: grey;
+                    margin-top: 35px;
+                    font-size: 34px;
+                    color: #9ec73d;
                 `;
                 item.parentNode.appendChild(statusMessage);
 
@@ -156,7 +156,10 @@ export default class Form {
                         this.clearInputs();
                         setTimeout(() => {
                             statusMessage.remove();
-                        }, 6000);
+                            item.classList.remove('animated');
+                            item.classList.remove('fadeOutRight');
+                            item.style.display = 'block';
+                        }, 6000);                        
                     });
             });
         });

@@ -5429,7 +5429,7 @@ function () {
           var statusMessage = document.createElement('div');
           statusMessage.classList.add('animated');
           statusMessage.classList.add('tada');
-          statusMessage.style.cssText = "\n                    margin-top: 15px;\n                    font-size: 18px;\n                    color: grey;\n                ";
+          statusMessage.style.cssText = "\n                    margin-top: 35px;\n                    font-size: 34px;\n                    color: #9ec73d;\n                ";
           item.parentNode.appendChild(statusMessage);
           item.classList.add('animated');
           item.classList.add('fadeOutRight');
@@ -5457,6 +5457,9 @@ function () {
 
             setTimeout(function () {
               statusMessage.remove();
+              item.classList.remove('animated');
+              item.classList.remove('fadeOutRight');
+              item.style.display = 'block';
             }, 6000);
           });
         });
