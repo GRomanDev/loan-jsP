@@ -2,7 +2,7 @@ export default class Form {
     constructor(forms) {
         this.forms = document.querySelectorAll(forms);
         this.inputs = document.querySelectorAll('input');
-        this.message = {
+        this.messages = {
             loading: 'Загрузка...',
             success: 'Спасибо! Скоро мы с вами свяжемся!',
             failure: 'Что-то пошло не так...'
@@ -11,8 +11,31 @@ export default class Form {
     }
 
     clearInputs() {
-        this.inputs.forEach(item => {
-            item.value = '';
+        this.inputs.forEach(input => {
+            input.value = '';
+        });
+    }
+
+    toggleBtn(boolean) {
+        this.forms.forEach((form) => {
+            let btn = form.querySelector('.btn');
+            btn.disabled = boolean;
+        });
+    }
+
+    checkInputsEmptyWarning() {
+        this.inputs.forEach((input) => {
+            input.addEventListener('blur', () => {
+                if (input.value.trim() === '') {
+                input.style.border = '1px solid red';
+                input.placeholder = 'please add text';
+                this.toggleBtn(true);
+                } else {
+                input.placeholder = '';
+                input.style.border = '';
+                this.toggleBtn(false);
+                }
+            });
         });
     }
 
@@ -86,6 +109,8 @@ export default class Form {
     }
 
     init() {
+        this.toggleBtn(true);
+        this.checkInputsEmptyWarning();
         this.checkMailInputs();
         this.initMask();
 
@@ -94,6 +119,8 @@ export default class Form {
                 e.preventDefault();
 
                 let statusMessage = document.createElement('div');
+                statusMessage.classList.add('animated');
+                statusMessage.classList.add('tada');
                 statusMessage.style.cssText = `
                     margin-top: 15px;
                     font-size: 18px;
@@ -101,17 +128,29 @@ export default class Form {
                 `;
                 item.parentNode.appendChild(statusMessage);
 
-                statusMessage.textContent = this.message.loading;
+                item.classList.add('animated');
+                item.classList.add('fadeOutRight');
+
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 500);
+            
+                const { loading, success, failure } = this.messages;
+        
+                setTimeout(() => {
+                    statusMessage.textContent = loading;
+                }, 500);
 
                 const formData = new FormData(item);
-
                 this.postData(this.path, formData)
                     .then(res => {
                         console.log(res);
-                        statusMessage.textContent = this.message.success;
+                        setTimeout(() => {
+                            statusMessage.textContent = success;
+                        }, 500);
                     })
                     .catch(() => {
-                        statusMessage.textContent = this.message.failure;
+                        statusMessage.textContent = failure;
                     })
                     .finally(() => {
                         this.clearInputs();
